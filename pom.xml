@@ -71,15 +71,6 @@
 					<source>1.7</source>
 				</configuration>
 			</plugin>
-			<!-- JavaFX util plugin -->
-			<plugin>
-				<groupId>com.zenjava</groupId>
-				<artifactId>javafx-maven-plugin</artifactId>
-				<version>1.4</version>
-				<configuration>
-					<mainClass>org.spout.platform.Launcher</mainClass>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 </project>
