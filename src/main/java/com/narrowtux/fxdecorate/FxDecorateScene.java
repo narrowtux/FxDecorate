@@ -45,7 +45,7 @@ public class FxDecorateScene extends Scene {
 		pane = (AnchorPane) getRoot();
 		this.stage = stage;
 
-		Color edges = new Color(1d, 0d, 0d, 0.5d);
+		Color edges = Color.TRANSPARENT;
 
 		// Align content
 		this.content = content;
@@ -64,6 +64,7 @@ public class FxDecorateScene extends Scene {
 		resizeWest.heightProperty().bind(heightProperty());
 		AnchorPane.setLeftAnchor(resizeWest, 0d);
 		AnchorPane.setTopAnchor(resizeWest, 0d);
+		controller.setResizeableHandle(resizeWest);
 
 		// Align top border
 		resizeNorth = new Rectangle();
@@ -74,6 +75,7 @@ public class FxDecorateScene extends Scene {
 		resizeNorth.heightProperty().bind(edgeSizeProperty());
 		AnchorPane.setLeftAnchor(resizeNorth, 0d);
 		AnchorPane.setTopAnchor(resizeNorth, 0d);
+		controller.setResizeableHandle(resizeNorth);
 
 		// Align right border
 		resizeEast = new Rectangle();
@@ -84,6 +86,7 @@ public class FxDecorateScene extends Scene {
 		resizeEast.heightProperty().bind(heightProperty());
 		AnchorPane.setTopAnchor(resizeEast, 0d);
 		AnchorPane.setRightAnchor(resizeEast, 0d);
+		controller.setResizeableHandle(resizeEast);
 
 		// Align bottom border
 		resizeSouth = new Rectangle();
@@ -94,8 +97,9 @@ public class FxDecorateScene extends Scene {
 		resizeSouth.heightProperty().bind(edgeSizeProperty());
 		AnchorPane.setLeftAnchor(resizeSouth, 0d);
 		AnchorPane.setBottomAnchor(resizeSouth, 0d);
+		controller.setResizeableHandle(resizeSouth);
 
-		Color corners = new Color(0d, 1d, 0d, 0.5d);
+		Color corners = Color.TRANSPARENT;
 
 		// Align north-west resize handle
 		resizeNorthWest = new Rectangle();
@@ -106,6 +110,7 @@ public class FxDecorateScene extends Scene {
 		resizeNorthWest.heightProperty().bind(edgeSize);
 		AnchorPane.setLeftAnchor(resizeNorthWest, 0d);
 		AnchorPane.setTopAnchor(resizeNorthWest, 0d);
+		controller.setResizeableHandle(resizeNorthWest);
 
 		// Align north-east resize handle
 		resizeNorthEast = new Rectangle();
@@ -116,6 +121,7 @@ public class FxDecorateScene extends Scene {
 		resizeNorthEast.heightProperty().bind(edgeSize);
 		AnchorPane.setRightAnchor(resizeNorthEast, 0d);
 		AnchorPane.setTopAnchor(resizeNorthEast, 0d);
+		controller.setResizeableHandle(resizeNorthEast);
 
 		// Align south-east resize handle
 		resizeSouthEast = new Rectangle();
@@ -126,6 +132,7 @@ public class FxDecorateScene extends Scene {
 		resizeSouthEast.heightProperty().bind(edgeSize);
 		AnchorPane.setRightAnchor(resizeSouthEast, 0d);
 		AnchorPane.setBottomAnchor(resizeSouthEast, 0d);
+		controller.setResizeableHandle(resizeSouthEast);
 
 		// Align south-west resize handle
 		resizeSouthWest = new Rectangle();
@@ -136,6 +143,7 @@ public class FxDecorateScene extends Scene {
 		resizeSouthWest.heightProperty().bind(edgeSize);
 		AnchorPane.setLeftAnchor(resizeSouthWest, 0d);
 		AnchorPane.setBottomAnchor(resizeSouthWest, 0d);
+		controller.setResizeableHandle(resizeSouthWest);
 	}
 
 	public int getEdgeSize() {

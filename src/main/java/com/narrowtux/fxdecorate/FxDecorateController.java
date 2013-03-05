@@ -25,9 +25,11 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 public class FxDecorateController {
 	private LinkedList<Node> moveNodes = new LinkedList<Node>();
@@ -162,8 +164,79 @@ public class FxDecorateController {
 		}
 	}
 
-	void setResizeableHandle(final Node handle) {
+	private double startX, startY, startWidth, startHeight;
+	private Cursor currentResizeHandle = null;
 
+	void setResizeableHandle(final Node handle) {
+		handle.setOnMousePressed(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				if (currentResizeHandle == null) {
+					startX = getScene().getWindow().getX();
+					startY = getScene().getWindow().getY();
+					startWidth = getScene().getWindow().getWidth();
+					startHeight = getScene().getWindow().getHeight();
+					moveStartPoint = new Point2D(e.getScreenX(), e.getScreenY());
+					currentResizeHandle = handle.getCursor();
+					e.consume();
+				}
+			}
+		});
+		handle.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				if (currentResizeHandle == handle.getCursor()) {
+					double dX = e.getScreenX() - moveStartPoint.getX();
+					double dY = e.getScreenY() - moveStartPoint.getY();
+					Stage stage = getScene().getStage();
+					if (currentResizeHandle == Cursor.W_RESIZE || currentResizeHandle == Cursor.NW_RESIZE || currentResizeHandle == Cursor.SW_RESIZE) {
+						if (setWindowWidth(startWidth - dX)) {
+							stage.setX(startX + dX);
+						}
+					}
+					if (currentResizeHandle == Cursor.N_RESIZE || currentResizeHandle == Cursor.NW_RESIZE || currentResizeHandle == Cursor.NE_RESIZE) {
+						if (setWindowHeight(startHeight - dY)) {
+							stage.setY(startY + dY);
+						}
+					}
+					if (currentResizeHandle == Cursor.E_RESIZE || currentResizeHandle == Cursor.SE_RESIZE || currentResizeHandle == Cursor.NE_RESIZE) {
+						setWindowWidth(startWidth + dX);
+					}
+					if (currentResizeHandle == Cursor.S_RESIZE || currentResizeHandle == Cursor.SE_RESIZE || currentResizeHandle == Cursor.SW_RESIZE) {
+						setWindowHeight(startHeight + dY);
+					}
+					e.consume();
+				}
+
+			}
+		});
+		handle.setOnMouseReleased(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				currentResizeHandle = null;
+				moveStartPoint = null;
+				e.consume();
+			}
+		});
+	}
+
+	private boolean setWindowHeight(double height) {
+		if (height > getScene().getStage().getMaxWidth()) {
+			return false;
+		}
+		if (height < getScene().getStage().getMinHeight()) {
+			return false;
+		}
+		getScene().getStage().setHeight(height);
+		return true;
+	}
+
+	private boolean setWindowWidth(double width) {
+		if (width > getScene().getStage().getMaxWidth()) {
+			return false;
+		}
+		if (width < getScene().getStage().getMinWidth()) {
+			return false;
+		}
+		getScene().getStage().setWidth(width);
+		return true;
 	}
 
 	/**
