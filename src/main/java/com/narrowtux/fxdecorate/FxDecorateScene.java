@@ -60,7 +60,7 @@ public class FxDecorateScene extends Scene {
 		resizeWest.setCursor(Cursor.W_RESIZE);
 		resizeWest.setFill(edges);
 		pane.getChildren().add(resizeWest);
-		resizeWest.widthProperty().bind(edgeSizeProperty());
+		resizeWest.widthProperty().bind(edgeSize);
 		resizeWest.heightProperty().bind(heightProperty());
 		AnchorPane.setLeftAnchor(resizeWest, 0d);
 		AnchorPane.setTopAnchor(resizeWest, 0d);
@@ -72,7 +72,7 @@ public class FxDecorateScene extends Scene {
 		resizeNorth.setFill(edges);
 		pane.getChildren().add(resizeNorth);
 		resizeNorth.widthProperty().bind(widthProperty());
-		resizeNorth.heightProperty().bind(edgeSizeProperty());
+		resizeNorth.heightProperty().bind(edgeSize);
 		AnchorPane.setLeftAnchor(resizeNorth, 0d);
 		AnchorPane.setTopAnchor(resizeNorth, 0d);
 		controller.setResizeableHandle(resizeNorth);
@@ -82,7 +82,7 @@ public class FxDecorateScene extends Scene {
 		resizeEast.setCursor(Cursor.E_RESIZE);
 		resizeEast.setFill(edges);
 		pane.getChildren().add(resizeEast);
-		resizeEast.widthProperty().bind(edgeSizeProperty());
+		resizeEast.widthProperty().bind(edgeSize);
 		resizeEast.heightProperty().bind(heightProperty());
 		AnchorPane.setTopAnchor(resizeEast, 0d);
 		AnchorPane.setRightAnchor(resizeEast, 0d);
@@ -94,7 +94,7 @@ public class FxDecorateScene extends Scene {
 		resizeSouth.setFill(edges);
 		pane.getChildren().add(resizeSouth);
 		resizeSouth.widthProperty().bind(widthProperty());
-		resizeSouth.heightProperty().bind(edgeSizeProperty());
+		resizeSouth.heightProperty().bind(edgeSize);
 		AnchorPane.setLeftAnchor(resizeSouth, 0d);
 		AnchorPane.setBottomAnchor(resizeSouth, 0d);
 		controller.setResizeableHandle(resizeSouth);
